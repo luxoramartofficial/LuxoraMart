@@ -2,994 +2,139 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Luxora Mart | Elite Edition</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon</title>
     <style>
-        /* --- PRO THEME VARIABLES --- */
-        :root {
-            --primary: #ff4b2b;
-            --primary-gradient: linear-gradient(135deg, #ff416c, #ff4b2b);
-            --discount-gradient: linear-gradient(135deg, #2b0000 0%, #ff1a1a 80%, #ff4b2b 100%); 
-            --bg-color: #f8f9fc;
-            --card-bg: #ffffff;
-            --text-dark: #121212;
-            --text-light: #7a7a7a;
-            --border-radius: 18px;
-            --nav-height: 65px;
+        /* Google Font import for a clean, modern look */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box;
-            font-family: 'Poppins', sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--bg-color); color: var(--text-dark);
-            overflow-x: hidden; }
-
-        /* --- PAGES --- */
-        .page { display: none;
-            padding-bottom: calc(var(--nav-height) + 20px); animation: fadeIn 0.3s ease; }
-        .page.active { display: block;
-        }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px);
-        } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- HEADER & ICONS --- */
-        .top-header { display: flex;
-            justify-content: space-between; align-items: center; padding: 15px 20px; background: transparent; z-index: 100;
-        }
-        .brand-container { display: flex; align-items: center; gap: 10px;
-        }
-        .brand-logo { width: 32px; height: 32px; border-radius: 50%; object-fit: cover;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-        .logo { font-size: 22px; font-weight: 800;
-            letter-spacing: -0.5px; color: var(--text-dark); }
-        .logo span { background: var(--primary-gradient); -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; }
-        
-        .header-icons { display: flex;
-            align-items: center; gap: 18px; }
-        .icon-btn { position: relative; cursor: pointer; display: flex;
-            align-items: center; justify-content: center; width: 22px; height: 22px; }
-        .icon-btn svg { width: 22px;
-            height: 22px; stroke: var(--text-dark); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round;
-        }
-        
-        .cart-badge {
-            position: absolute;
-            top: -7px; right: -8px; background: var(--primary); color: white;
-            font-size: 9px; font-weight: bold; width: 18px; height: 18px; border-radius: 50%;
+        body {
+            height: 100vh;
             display: flex;
-            justify-content: center; align-items: center; border: 2px solid var(--bg-color);
+            justify-content: center;
+            align-items: center;
+            /* Animated Dark Gradient Background */
+            background: linear-gradient(-45deg, #0f172a, #1e293b, #334155, #0f172a);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+            color: #ffffff;
+            overflow: hidden;
+            position: relative;
         }
 
-        .orders-badge { 
-            position: absolute;
-            top: -8px; right: -18px; background: var(--primary); color: white;
-            font-size: 9px; font-weight: bold; width: 18px; height: 18px; border-radius: 50%;
-            display: none;
-            justify-content: center; align-items: center; border: 2px solid var(--bg-color);
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        .back-btn svg { width: 24px;
-            height: 24px; stroke: var(--text-dark); stroke-width: 2; fill: none; cursor: pointer;
+        /* Glassmorphism Effect Container */
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 4rem 5rem;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            z-index: 10;
         }
 
-        .contact-me-btn { display: flex; align-items: center; cursor: pointer; color: var(--text-dark);
-        }
-        .contact-me-btn svg { width: 22px; height: 22px; stroke: var(--text-dark); stroke-width: 2;
-            fill: none; margin-right: 0; }
-        .contact-me-btn span { display: none;
-        }
-
-        /* --- SEARCH BAR --- */
-        .search-container { margin: 5px 20px 5px 20px;
-            position: relative; display: flex; align-items: center; }
-        .search-container input {
-            width: 100%;
-            padding: 14px 15px 14px 50px; border-radius: 25px;
-            border: 1px solid #e0e0e0; background: #ffffff; font-size: 14px;
-            font-weight: 500; outline: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: 0.3s; 
-        }
-        .search-container input:focus { border-color: var(--primary);
-            box-shadow: 0 4px 15px rgba(255, 75, 43, 0.15); }
-        .search-icon { position: absolute;
-            left: 18px; top: 50%; transform: translateY(-50%); margin-top: -6.5px; width: 20px; height: 20px; stroke: var(--text-light); stroke-width: 2; fill: none;
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            /* Gradient Text */
+            background: linear-gradient(to right, #00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        /* --- PROMO BANNER --- */
-        .promo-banner {
-            margin: 15px 20px 5px 20px;
-            border-radius: 15px; padding: 20px;
-            background: var(--discount-gradient); color: white;
-            box-shadow: 0 8px 20px rgba(255, 26, 26, 0.4); cursor: pointer;
+        p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: #cbd5e1;
+            margin-bottom: 35px;
+            letter-spacing: 1px;
+        }
+
+        /* Bouncing Dots Loader to indicate "working in background" */
+        .loader {
             display: flex;
-            justify-content: space-between; align-items: center; overflow: hidden;
-        }
-        .promo-banner h3 { font-size: 19px;
-            font-weight: 900; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
-        .promo-banner span { font-size: 13px;
-            background: white; color: #d60000; padding: 8px 16px; border-radius: 25px; font-weight: 800; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            z-index: 2;}
-
-        /* --- CUSTOM DROPDOWN --- */
-        .custom-dropdown { position: relative;
-            width: 100%; background: white; border: 2px solid #eee; padding: 14px 18px; border-radius: 12px; cursor: pointer; font-size: 15px; font-weight: 600;
-            display: flex; justify-content: space-between; align-items: center; color: var(--text-dark); box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-        }
-        .dropdown-menu { position: absolute; top: calc(100% + 5px); left: 0; width: 100%;
-            background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 50; display: none; flex-direction: column; overflow: hidden;
-            border: 1px solid #eee; }
-        .dropdown-menu.show { display: flex; animation: fadeInModal 0.2s;
-        }
-        .dropdown-item { padding: 14px 20px; font-size: 14px; font-weight: 500; transition: 0.2s;
-            border-bottom: 1px solid #f5f5f5; color: var(--text-dark); }
-        .dropdown-item:last-child { border-bottom: none;
-        }
-        .dropdown-item:hover, .dropdown-item:active { background: #fff5f5; color: var(--primary);
-        }
-        .dropdown-icon { transition: transform 0.3s;
-        }
-        .custom-dropdown.active .dropdown-icon { transform: rotate(180deg);
+            justify-content: center;
+            gap: 12px;
         }
 
-        /* --- FULLSCREEN IMAGE MODAL --- */
-        .fullscreen-modal { position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 99999; display: none; justify-content: center; align-items: center; opacity: 0;
-            transition: opacity 0.3s ease; }
-        .fullscreen-modal.active { display: flex; opacity: 1;
-        }
-        .fullscreen-modal img { max-width: 95%; max-height: 90%; border-radius: 12px; object-fit: contain;
-        }
-        .close-fullscreen { position: absolute; top: 25px; right: 25px; color: white; font-size: 30px;
-            font-weight: bold; cursor: pointer; background: rgba(255,255,255,0.2); width: 45px; height: 45px; border-radius: 50%; display: flex; justify-content: center; align-items: center; line-height: 0;
-            border: 2px solid white; }
-
-        /* --- LOADER CSS --- */
-        @keyframes spinner-spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-        .spinner {
-            border: 3px solid #e0e0e0; border-top: 3px solid var(--primary);
-            border-radius: 50%; width: 26px; height: 26px;
-            position: absolute; top: 50%; left: 50%;
-            animation: spinner-spin 1s linear infinite;
-        }
-        .p-image-container {
-            width: 100%; height: 160px; border-radius: 12px;
-            position: relative; background: #eee; overflow: hidden;
-        }
-        .p-image-container img {
-            width: 100%; height: 100%; object-fit: cover;
-            opacity: 0; transition: opacity 0.3s ease-in;
-            position: relative; z-index: 1;
+        .dot {
+            width: 16px;
+            height: 16px;
+            background-color: #4facfe;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+            box-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
         }
 
-        /* --- PRODUCT GRID --- */
-        .section-title { font-size: 18px;
-            font-weight: 700; padding: 20px 20px 10px 20px; }
-        .grid-container { padding: 0 20px;
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-        
-        .product-card { 
-            background: var(--card-bg);
-            border-radius: var(--border-radius); padding: 10px; 
-            cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.03); position: relative; 
-            opacity: 0; transform: translateY(30px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        .dot:nth-child(1) { animation-delay: -0.32s; }
+        .dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
         }
-        .product-card.show { opacity: 1;
-            transform: translateY(0); }
-        .product-card:active { transform: scale(0.97);
+
+        /* Glowing background blobs for depth */
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: 1;
+            opacity: 0.4;
+            border-radius: 50%;
+        }
+        .blob1 {
+            width: 350px; height: 350px;
+            background: #4facfe;
+            top: -100px; left: -100px;
+        }
+        .blob2 {
+            width: 450px; height: 450px;
+            background: #00f2fe;
+            bottom: -150px; right: -100px;
         }
         
-        .p-cat { font-size: 10px;
-            color: var(--text-light); text-transform: uppercase; margin-top: 8px; font-weight: 600; display: flex; justify-content: space-between;
-            align-items: center;}
-        .p-code { background: #f0f0f0; padding: 2px 6px; border-radius: 5px; color: #555;
-            font-size: 9px; }
-        .p-name { font-size: 13px; font-weight: 600; margin: 4px 0;
-            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.3;
-        }
-        .p-price { font-size: 15px; font-weight: 700; color: var(--primary); display: flex; flex-direction: column;
-        }
-        .p-price-old { text-decoration: line-through; font-size: 11px; color: #999; font-weight: 500;
-        }
-        .discount-tag { position: absolute; top: 15px; left: 15px; background: var(--text-dark); color: white;
-            font-size: 10px; padding: 3px 8px; border-radius: 5px; font-weight: bold; z-index: 2;
-        }
-
-        /* --- PRODUCT DETAILS --- */
-        .detail-img-container { width: 100%;
-            height: 380px; position: relative; background: #eee; }
-        .detail-img-container img { width: 100%; height: 100%; object-fit: cover;
-            cursor: pointer; opacity: 0; transition: opacity 0.3s ease-in; position: relative; z-index: 1; }
-        .detail-content { background: var(--card-bg); border-top-left-radius: 30px; border-top-right-radius: 30px;
-            padding: 30px 20px; margin-top: -30px; position: relative; min-height: 400px; }
-        .gallery-mini { display: flex;
-            gap: 12px; margin-bottom: 20px; overflow-x: auto; scrollbar-width: none; }
-        .gallery-mini::-webkit-scrollbar { display: none;
-        }
-        .gallery-mini img { width: 65px; height: 65px; border-radius: 12px; object-fit: cover;
-            border: 2px solid transparent; cursor: pointer; transition: 0.2s; opacity: 0.6;
-        }
-        .gallery-mini img.active { border-color: var(--primary); opacity: 1;
-        }
-        .d-title { font-size: 22px; font-weight: 700; margin: 5px 0; line-height: 1.3;
-        }
-        .d-price { font-size: 24px; font-weight: 800; color: var(--primary); margin-bottom: 20px; display: flex;
-            flex-direction: column; }
-        .d-desc { font-size: 14px; color: var(--text-light); line-height: 1.6; margin-bottom: 30px;
-        }
-
-        .bottom-action { position: fixed; bottom: 0; left: 0; width: 100%;
-            padding: 15px 20px; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); display: flex; gap: 15px; box-shadow: 0 -5px 20px rgba(0,0,0,0.05); z-index: 101;
-        }
-        .btn { padding: 15px; border-radius: 12px; border: none; font-size: 15px; font-weight: 600;
-            cursor: pointer; text-align: center; color: white; flex: 1; transition: 0.2s;
-        }
-        .btn:active { transform: scale(0.95);
-        }
-        .btn-cart { background: var(--text-dark);
-        }
-        .btn-buy { background: var(--primary-gradient);
-        }
-
-        /* --- CART & ORDERS TABS --- */
-        .cart-tabs { display: flex;
-            justify-content: center; margin: 10px 20px 20px; border-bottom: 2px solid #eee;
-        }
-        .cart-tab { flex: 1; text-align: center; padding: 12px 0; font-size: 14px;
-            font-weight: 600; color: var(--text-light); cursor: pointer; border-bottom: 3px solid transparent; transition: 0.3s; position: relative;
-        }
-        .cart-tab.active { color: var(--primary); border-bottom-color: var(--primary);
-        }
-
-        .cart-item { display: flex; align-items: center; background: var(--card-bg);
-            margin: 0 20px 15px 20px; padding: 12px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-        }
-        .cart-item img { width: 70px; height: 70px; border-radius: 10px; object-fit: cover;
-            margin-right: 15px; }
-        .cart-details { flex: 1;
-        }
-        .cart-remove svg { width: 20px; height: 20px; stroke: red; cursor: pointer;
-        }
-        .cart-total-box { margin: 20px; padding: 20px; background: var(--card-bg); border-radius: 15px; text-align: right;
-            font-size: 18px; font-weight: 700; }
-        .status-badge { font-size: 10px; background: #e8f5e9; color: #2e7d32;
-            padding: 4px 8px; border-radius: 8px; font-weight: 700; }
-
-        .swipeable-area { user-select: none;
-        }
-
-        /* --- CHECKOUT FORM UI --- */
-        .checkout-box { background: var(--card-bg);
-            border-radius: var(--border-radius); padding: 20px; margin: 15px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-        }
-        .checkout-box h3 { font-size: 15px; margin-bottom: 15px; display: flex; align-items: center;
-            gap: 8px; color: var(--primary); }
-        input, textarea { width: 100%; padding: 14px;
-            margin-bottom: 15px; border: 2px solid #eee; border-radius: 12px; font-size: 14px; outline: none; background: #fafafa;
-        }
-        input:focus, textarea:focus { border-color: var(--primary); background: white;
-        }
-        input#form-phone { margin-bottom: 5px;
-        }
-        .form-instruction { font-size: 10px; color: var(--text-light); font-weight: 500; margin-bottom: 15px;
-            margin-left: 5px;}
-
-        /* --- BOTTOM NAVIGATION --- */
-        .bottom-nav { 
-            position: fixed;
-            bottom: 0; left: 0; width: 100%; height: var(--nav-height); 
-            background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border-top: 1px solid rgba(255, 255, 255, 0.4); border-top-left-radius: 25px; border-top-right-radius: 25px; 
-            display: flex; justify-content: space-around; align-items: center;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.05); z-index: 100; 
-        }
-        .nav-item { display: flex;
-            flex-direction: column; align-items: center; color: var(--text-light); font-size: 10px; font-weight: 500; cursor: pointer; width: 20%;
-        }
-        .nav-item svg { width: 22px; height: 22px; stroke: var(--text-light); stroke-width: 2;
-            fill: none; margin-bottom: 4px; transition: 0.3s; }
-        .nav-item.active { color: var(--primary);
-        }
-        .nav-item.active svg { stroke: var(--primary);
-        }
-
-        /* --- CUSTOM ALERT MODAL --- */
-        .custom-alert-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px);
-            display: none; justify-content: center;
-            align-items: center; z-index: 9999;
-        }
-        .custom-alert-overlay.active { display: flex; animation: fadeInModal 0.3s forwards;
-        }
-        @keyframes fadeInModal { from { opacity: 0; } to { opacity: 1;
-        } }
-        .custom-alert-box {
-            background: var(--card-bg);
-            padding: 30px 20px; border-radius: 20px;
-            width: 85%; max-width: 350px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transform: scale(0.8);
-            animation: scaleUp 0.3s forwards;
-        }
-        @keyframes scaleUp { from { transform: scale(0.8);
-        } to { transform: scale(1); } }
-        
-        .custom-alert-icon { 
-            width: 60px;
-            height: 60px; background: transparent; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; margin: 0 auto 15px; border: 2px solid transparent;
-        }
-        
-        .custom-alert-message { font-size: 15px;
-            color: var(--text-dark); margin-bottom: 25px; font-weight: 500; line-height: 1.5; }
-        .custom-alert-btn { background: var(--primary-gradient);
-            color: white; border: none; padding: 12px 25px; border-radius: 25px; font-size: 15px; font-weight: 600; cursor: pointer; width: 100%; transition: 0.2s;
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .container {
+                padding: 2.5rem 2rem;
+                width: 90%;
+            }
+            h1 { font-size: 2.2rem; }
+            p { font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
-
-    <div id="fullscreen-image-modal" class="fullscreen-modal" onclick="closeFullscreenModal()">
-        <span class="close-fullscreen">&times;</span>
-        <img id="fullscreen-modal-img" src="" alt="Fullscreen view" onclick="event.stopPropagation()">
-    </div>
-
-    <div class="custom-alert-overlay" id="custom-alert-overlay">
-        <div class="custom-alert-box">
-            <div id="custom-alert-icon-container" class="custom-alert-icon"></div>
-            <div class="custom-alert-message" id="custom-alert-text">Message</div>
-            <button class="custom-alert-btn" id="custom-alert-ok-btn" onclick="closeCustomAlert()">OK</button>
-        </div>
-    </div>
-
-    <div class="top-header" id="global-header">
-        <div class="brand-container">
-            <img src="" alt="Logo" class="brand-logo" id="main-brand-logo" onerror="this.src='https://via.placeholder.com/32'">
-            <div class="logo">Luxora<span>Mart</span></div>
-        </div>
-        <div class="header-icons">
-            <div class="contact-me-btn" onclick="window.open('https://wa.me/923474226197?text=Hello%20sir,%20guide%20me%20about%20your%20sites', '_blank')">
-                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                <span>Contact me</span>
-            </div>
-            
-            <div class="icon-btn" onclick="switchPage('page-cart'); switchCartTab('orders');">
-                <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                <div class="cart-badge" id="top-orders-badge" style="display: none; background: #28a745;">0</div>
-            </div>
-
-            <div class="icon-btn" onclick="switchPage('page-cart'); switchCartTab('cart');">
-                <svg viewBox="0 0 24 24"><path d="M9 20a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/><path d="M20 20a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-                <div class="cart-badge" id="cart-badge" style="display: none;">0</div>
-            </div>
-        </div>
-    </div>
-
-    <div id="page-home" class="page active">
-        <div class="search-container">
-            <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input type="text" id="main-search-input" placeholder="Search by name..." onkeyup="handleSearch(this.value)">
-        </div>
-
-        <div class="promo-banner" onclick="switchPage('page-discount')">
-            <div style="min-height: 48px; flex: 1; display: flex; align-items: center;">
-                <h3 id="ui-promo-text" style="width: 100%; line-height: 1.2;">MEGA SALE</h3>
-            </div>
-            <span style="z-index: 2;">Shop Now</span>
-        </div>
- 
-        <div class="section-title">New Arrivals</div>
-        <div class="grid-container" id="main-grid"></div>
-    </div>
-
-    <div id="page-categories" class="page">
-        <div style="padding: 20px;">
-            <h2 style="margin-bottom: 15px;">Shop by Category</h2>
-            
-            <div class="custom-dropdown" id="cat-dropdown" onclick="toggleDropdown(event)">
-                <span id="cat-selected">All Items</span>
-                <svg class="dropdown-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                <div class="dropdown-menu" id="cat-dropdown-menu">
-                    <div class="dropdown-item" onclick="selectCategory('All', event)">All Items</div>
-                    <div class="dropdown-item" onclick="selectCategory('Clothes', event)">Clothes</div>
-                    <div class="dropdown-item" onclick="selectCategory('Bags', event)">Bags</div>
-                    <div class="dropdown-item" onclick="selectCategory('Cosmetics', event)">Cosmetics</div>
-                    <div class="dropdown-item" onclick="selectCategory('Shoes', event)">Shoes</div>
-                    <div class="dropdown-item" onclick="selectCategory('Accessories', event)">Accessories</div>
-                </div>
-            </div>
-        </div>
-        <div class="grid-container" id="category-grid"></div>
-    </div>
-
-    <div id="page-discount" class="page">
-        <div style="padding: 20px; background: var(--discount-gradient); color: white; margin-bottom: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;">
-            <h2 id="discount-page-title">MEGA SALE</h2>
-            <p style="font-size: 13px; opacity: 0.9;">Grab them before they are gone!</p>
-        </div>
-        <div class="grid-container" id="discount-grid"></div>
-    </div>
-
-    <div id="page-detail" class="page">
-        <div class="top-header" style="position: absolute; width: 100%; background: transparent; box-shadow: none;">
-            <div class="icon-btn back-btn" onclick="goBack()" style="background: rgba(255,255,255,0.9); width:40px; height:40px; border-radius:50%;">
-                <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-            </div>
-        </div>
-        <div id="detail-dynamic-content"></div>
-    </div>
-
-    <div id="page-cart" class="page swipeable-area" id="cart-swipe-wrapper"> 
-        <div style="padding: 20px 20px 0 20px;">
-            <h2 style="display:flex; align-items:center; gap:10px;">
-                <span onclick="goBack()" style="cursor:pointer;">&larr;</span> My Bag
-            </h2>
-        </div>
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    
+    <div class="container">
+        <h1>Coming Soon</h1>
+        <p>Developers are still working in the background...</p>
         
-        <div class="cart-tabs" id="cart-tab-header"> 
-            <div class="cart-tab active" onclick="switchCartTab('cart')" id="tab-btn-cart">Cart Items</div>
-            <div class="cart-tab" onclick="switchCartTab('orders')" id="tab-btn-orders">
-                <span style="position: relative;">My Orders <div class="orders-badge" id="orders-badge">0</div></span>
-            </div> 
-        </div>
-
-        <div id="cart-view-section">
-            <div id="cart-container"></div>
-            <div class="cart-total-box" id="cart-total-box" style="display: none;">Total: <span id="cart-total-price">Rs. 0</span></div>
-            <div style="padding: 0 20px;">
-                <button class="btn btn-buy" id="checkout-btn" style="width: 100%; display:none;" onclick="handleCheckout()">Proceed to Checkout</button>
-            </div>
-            <div id="empty-cart-msg" style="text-align: center; padding: 50px 20px; color: var(--text-light);"><h3>Cart is empty</h3></div>
-        </div>
-
-        <div id="orders-view-section" style="display: none;">
-            <div id="orders-container"></div>
-            <div id="empty-orders-msg" style="text-align: center; padding: 50px 20px; color: var(--text-light);"><h3>No previous orders</h3></div>
+        <div class="loader">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
         </div>
     </div>
-
-    <div id="page-checkout" class="page">
-        <div style="padding: 20px 20px 0 20px;">
-            <h2 style="display:flex; align-items:center; gap:10px;">
-                <span onclick="goBack()" style="cursor:pointer;">&larr;</span> Delivery Details
-            </h2>
-        </div>
-        
-        <form id="orderForm" onsubmit="submitOrderForm(event)">
-            <div class="checkout-box">
-                <h3>Contact Details</h3>
-                <input type="text" id="form-name" placeholder="Full Name" required>
-                <input type="tel" id="form-phone" placeholder="Phone Number" required>
-                <p class="form-instruction">We will call you to confirm your order</p> 
-                <input type="email" id="form-email" placeholder="Email Address" required>
-            </div>
-
-            <div class="checkout-box">
-                <h3>Address Details</h3>
-                <input type="text" id="form-city" placeholder="City" required>
-                <input type="text" id="form-area" placeholder="Sector / Area Name" required>
-                <textarea id="form-address" placeholder="Complete Home Address" rows="3" required></textarea>
-            </div>
-
-            <div style="padding: 0 20px 10px 20px; text-align: center;">
-                <div style="font-size: 18px; font-weight: 700; color: var(--primary);">Total: <span id="checkout-total-price">Rs. 0</span></div>
-                <div style="font-size: 13px; font-weight: 700; color: #2e7d32; margin-top: 2px;">Free Home Delivery</div>
-            </div>
-
-            <div style="padding: 0 20px;">
-                <button type="submit" id="submit-btn" class="btn btn-buy" style="width: 100%;">Confirm & Place Order</button>
-            </div>
-        </form>
-    </div>
-
-    <div class="bottom-nav" id="main-bottom-nav">
-        <div class="nav-item active" onclick="switchPage('page-home', this)"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><div>Home</div></div>
-        <div class="nav-item" onclick="openCategoryNav('Clothes', this)"><svg viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a8.5 8.5 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.48a1 1 0 0 0 .99.83H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.83l.58-3.48a2 2 0 0 0-1.34-2.23z"/></svg><div>Clothes</div></div>
-        <div class="nav-item" onclick="openCategoryNav('Bags', this)"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><div>Bags</div></div>
-        <div class="nav-item" onclick="openCategoryNav('Cosmetics', this)"> 
-            <svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
-            <div>Cosmetics</div> 
-        </div>
-        <div class="nav-item" onclick="openCategoryNav('Shoes', this)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M19 20v-8a2 2 0 0 0-2-2h-3a2 2 0 0 0-2 2v2l-4 4-2-2v4h13z"/><line x1="16" y1="20" x2="22" y2="20"/>
-            </svg>
-            <div>Shoes</div>
-        </div>
-    </div>
-
-    <script>
-        // ---- PASTE YOUR *NEW* GOOGLE APPS SCRIPT WEB APP URL HERE ----
-        const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbyNDhniYHVj9GHnc3i36CSKPiuMG-iCl4YKUsfjdeUZYqdOGJm7Z_NzJ0-a6RL7ioWmHA/exec"; 
-        
-        let parsedProducts = [];
-        let cart = [];
-        let pastOrders = []; 
-        let pageHistory = ['page-home'];
-        let currentCategoryFilter = 'All';
-        const ALERT_TYPE = { INFO: 'info', SUCCESS_ORDER: 'success_order', ADDED_CART: 'added_cart' };
-
-        function showCustomAlert(message, type = ALERT_TYPE.INFO) {
-            const iconContainer = document.getElementById('custom-alert-icon-container');
-            const alertBox = document.querySelector('.custom-alert-box');
-            let iconHTML = '';
-            alertBox.style.borderColor = 'transparent';
-            if (type === ALERT_TYPE.SUCCESS_ORDER) {
-                iconHTML = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h.01M22 6h.01M14 6h.01M18 2h.01"/><path d="M6 10h.01M2 6h.01M10 6h.01M6 2h.01"/><polyline points="10 17 12 19 14 17"/><line x1="12" y1="19" x2="12" y2="23"/></svg>`;
-                alertBox.style.borderColor = '#e8f5e9'; 
-            } else if (type === ALERT_TYPE.ADDED_CART) {
-                iconHTML = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ff4b2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>`;
-                alertBox.style.borderColor = '#ffebeb'; 
-            } else {
-                iconHTML = `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#121212" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>`;
-                alertBox.style.borderColor = '#eee'; 
-            }
-            iconContainer.innerHTML = iconHTML;
-            document.getElementById('custom-alert-text').innerText = message;
-            document.getElementById('custom-alert-overlay').classList.add('active');
-        }
-
-        function closeCustomAlert() { document.getElementById('custom-alert-overlay').classList.remove('active');
-        }
-
-        function openFullscreenModal(imgSrc) {
-            document.getElementById('fullscreen-modal-img').src = imgSrc;
-            document.getElementById('fullscreen-image-modal').classList.add('active');
-        }
-        function closeFullscreenModal() { document.getElementById('fullscreen-image-modal').classList.remove('active');
-        }
-
-        function toggleDropdown(event) {
-            event.stopPropagation();
-            document.getElementById('cat-dropdown').classList.toggle('active');
-            document.getElementById('cat-dropdown-menu').classList.toggle('show');
-        }
-        function selectCategory(cat, event) {
-            event.stopPropagation();
-            currentCategoryFilter = cat;
-            document.getElementById('cat-selected').innerText = cat === 'All' ? 'All Items' : cat;
-            document.getElementById('cat-dropdown').classList.remove('active');
-            document.getElementById('cat-dropdown-menu').classList.remove('show');
-            filterCategoryView();
-        }
-        document.addEventListener('click', function(e) {
-            let menu = document.getElementById('cat-dropdown-menu');
-            let dropdown = document.getElementById('cat-dropdown');
-            if(menu && menu.classList.contains('show') && !dropdown.contains(e.target)) {
-                menu.classList.remove('show');
-                dropdown.classList.remove('active');
-            }
-        });
-        const scrollObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('show'); } }); }, { threshold: 0.1 });
-        function attachObserver() { document.querySelectorAll('.product-card').forEach(c => scrollObserver.observe(c)); }
-        function formatPrice(num) { return "Rs. " + num.toLocaleString();
-        }
-
-        function loadStorageData() {
-            let savedCart = localStorage.getItem('luxora_cart_v2');
-            if(savedCart) { cart = JSON.parse(savedCart); updateCartBadge(); updateCartView(); }
-            let savedOrders = localStorage.getItem('luxora_orders_v2');
-            if(savedOrders) { pastOrders = JSON.parse(savedOrders); updateOrdersBadge(); } 
-        }
-        function saveUserCart() { localStorage.setItem('luxora_cart_v2', JSON.stringify(cart));
-        }
-        function saveUserOrders() { localStorage.setItem('luxora_orders_v2', JSON.stringify(pastOrders)); updateOrdersBadge();
-        } 
-        
-        function updateCartBadge() { 
-            document.getElementById('cart-badge').innerText = cart.length;
-            document.getElementById('cart-badge').style.display = cart.length > 0 ? 'flex' : 'none'; 
-        }
-        
-        function updateOrdersBadge() {
-             const badge = document.getElementById('orders-badge');
-             const topBadge = document.getElementById('top-orders-badge');
-             
-             if (pastOrders.length > 0) {
-                 badge.innerText = pastOrders.length;
-                 badge.style.display = 'flex';
-                 if(topBadge) {
-                     topBadge.innerText = pastOrders.length;
-                     topBadge.style.display = 'flex';
-                 }
-             } else {
-                 badge.style.display = 'none';
-                 if(topBadge) topBadge.style.display = 'none';
-             }
-        }
-
-        function getDiscountedPrice(price, discountFlag) { return discountFlag === "yes" ?
-            Math.round(price - (price * GLOBAL_DISCOUNT_PERCENT / 100)) : price; }
-
-        function getPriceHTML(p) {
-            if(p.discount === "yes") return `<span class="p-price-old">Rs. ${p.originalPrice.toLocaleString()}</span> Rs. ${p.price.toLocaleString()}`;
-            return `Rs. ${p.price.toLocaleString()}`;
-        }
-
-        function handleSearch(query) {
-            let lowerQuery = query.toLowerCase();
-            let filtered = parsedProducts.filter(p => p.name.toLowerCase().includes(lowerQuery) || p.mainCategory.toLowerCase().includes(lowerQuery) || p.code.toLowerCase().includes(lowerQuery));
-            let mainGrid = document.getElementById('main-grid');
-            mainGrid.innerHTML = '';
-            if(filtered.length === 0) { mainGrid.innerHTML = '<div style="grid-column: span 2; text-align: center; padding: 30px; color: gray;">No products found.</div>'; return;
-            }
-            filtered.forEach(p => { mainGrid.innerHTML += generateCardHTML(p); });
-            attachObserver();
-        }
-
-        function generateCardHTML(p) {
-            return `
-                <div class="product-card" onclick="openDetail(${p.id})">
-                    ${p.discount === "yes" ? `<div class="discount-tag">SALE ${GLOBAL_DISCOUNT_PERCENT}%</div>` : ''}
-                    <div class="p-image-container">
-                        <div class="spinner"></div>
-                        <img src="${p.images[0]}" onload="this.style.opacity=1; this.previousElementSibling.style.display='none';">
-                    </div>
-                    <div class="p-cat"><span>${p.mainCategory}</span> <span class="p-code">${p.code}</span></div>
-                    <div class="p-name">${p.name}</div>
-                    <div class="p-price">${getPriceHTML(p)}</div>
-                </div>
-            `;
-        }
-
-        function renderHome() {
-            let mainGrid = document.getElementById('main-grid');
-            let discountGrid = document.getElementById('discount-grid');
-            mainGrid.innerHTML = ''; discountGrid.innerHTML = '';
-            parsedProducts.forEach(p => { let cardHTML = generateCardHTML(p); mainGrid.innerHTML += cardHTML; if(p.discount === "yes") discountGrid.innerHTML += cardHTML; });
-            attachObserver();
-        }
-
-        function openCategoryNav(catName, navElement) { 
-            currentCategoryFilter = catName;
-            document.getElementById('cat-selected').innerText = catName;
-            filterCategoryView(); 
-            switchPage('page-categories', navElement); 
-        }
-        
-        function filterCategoryView() {
-            let grid = document.getElementById('category-grid');
-            grid.innerHTML = '';
-            let filtered = currentCategoryFilter === 'All' ? parsedProducts : parsedProducts.filter(p => p.categories[currentCategoryFilter] === 1);
-            filtered.forEach(p => { grid.innerHTML += generateCardHTML(p); }); attachObserver();
-        }
-
-        function switchPage(pageId, navElement = null) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            if(pageHistory[pageHistory.length-1] !== pageId) pageHistory.push(pageId);
-            if(navElement) { document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active')); navElement.classList.add('active');
-            }
-            let hideBars = (pageId === 'page-detail' || pageId === 'page-checkout');
-            document.getElementById('global-header').style.display = hideBars ? 'none' : 'flex'; document.getElementById('main-bottom-nav').style.display = hideBars ? 'none' : 'flex';
-            if(pageId === 'page-cart') { switchCartTab('cart');
-            }
-            window.scrollTo(0, 0);
-        }
-
-        function goBack() {
-            if(pageHistory.length > 1) {
-                pageHistory.pop();
-                let prevPage = pageHistory[pageHistory.length-1];
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); document.getElementById(prevPage).classList.add('active');
-                let hideBars = (prevPage === 'page-detail' || prevPage === 'page-checkout');
-                document.getElementById('global-header').style.display = hideBars ? 'none' : 'flex'; document.getElementById('main-bottom-nav').style.display = hideBars ? 'none' : 'flex';
-            }
-        }
-
-        function openDetail(id) {
-            let p = parsedProducts.find(x => x.id === id);
-            if(!p) return;
-            let thumbsHTML = p.images.map((imgUrl, index) => `<img src="${imgUrl}" class="${index === 0 ? 'active' : ''}" onclick="changeMainImage(this, '${imgUrl}')">`).join('');
-            
-            // --- RELATED PRODUCTS LOGIC ---
-            let relatedProducts = parsedProducts.filter(x => x.mainCategory === p.mainCategory && x.id !== p.id).slice(0, 4);
-            if (relatedProducts.length === 0) {
-                 // Fallback if no products in same category
-                 relatedProducts = parsedProducts.filter(x => x.id !== p.id).slice(0, 4);
-            }
-            
-            let relatedHTML = '';
-            if (relatedProducts.length > 0) {
-                relatedHTML = `
-                    <div class="section-title" style="padding: 30px 0 10px 0; font-size: 16px;">You May Also Like</div>
-                    <div class="grid-container" style="padding: 0; margin-bottom: 90px;">`;
-                relatedProducts.forEach(rel => {
-                    relatedHTML += generateCardHTML(rel);
-                });
-                relatedHTML += `</div>`;
-            } else {
-                relatedHTML = `<div style="padding-bottom: 90px;"></div>`;
-            }
-
-            document.getElementById('detail-dynamic-content').innerHTML = `
-                <div class="detail-img-container">
-                    <div class="spinner"></div>
-                    <img src="${p.images[0]}" id="main-detail-img" style="opacity:0;" onload="this.style.opacity=1; this.previousElementSibling.style.display='none';" onclick="openFullscreenModal(this.src)">
-                </div>
-                <div class="detail-content">
-                    <div class="p-cat"><span>${p.mainCategory}</span> <span class="p-code">Code: ${p.code}</span></div>
-                    <div class="d-title">${p.name}</div>
-                    <div class="d-price">${getPriceHTML(p)}</div>
-                    <div style="font-size: 13px; font-weight: 600; color: #2e7d32; margin-top: -15px; margin-bottom: 20px;">Free home delivery</div>
-                    ${p.images.length > 1 ? `<div class="gallery-mini">${thumbsHTML}</div>` : ''}
-                    <div style="font-weight: 600; margin-bottom: 5px;">Description</div>
-                    <div class="d-desc">${p.description}</div>
-                    ${relatedHTML}
-                </div>
-                <div class="bottom-action">
-                    <button class="btn btn-cart" onclick="addToCart(${p.id})">Add to Cart</button>
-                    <button class="btn btn-buy" onclick="buyNow(${p.id})">Buy Now</button>
-                </div>
-            `;
-            
-            window.scrollTo(0, 0); // Scroll to top for new product view
-            switchPage('page-detail'); 
-            attachObserver(); // Initialize animations for related products
-        }
-
-        function changeMainImage(element, url) {
-            let imgEl = document.getElementById('main-detail-img');
-            imgEl.style.opacity = 0; // Hide image temporarily
-            imgEl.previousElementSibling.style.display = 'block'; // Show spinner
-            imgEl.src = url;
-            
-            let siblings = element.parentElement.children;
-            for(let i=0; i<siblings.length; i++) siblings[i].classList.remove('active');
-            element.classList.add('active');
-        }
-
-        function addToCart(id) {
-            if(cart.find(x => x.id === id)) { showCustomAlert('This item is already in your cart!');
-                return; }
-            cart.push(parsedProducts.find(x => x.id === id));
-            saveUserCart(); updateCartBadge();
-            showCustomAlert('Item added to cart!', ALERT_TYPE.ADDED_CART); 
-        }
-
-        function removeFromCart(index) { cart.splice(index, 1); saveUserCart(); updateCartView();
-            updateCartBadge(); }
-
-        let currentCartTab = 'cart';
-        function switchCartTab(tab, elementTrigger = false) {
-            currentCartTab = tab;
-            const tabHeader = document.getElementById('cart-tab-header');
-            const tabs = tabHeader.children;
-            
-            for (let t of tabs) { t.classList.remove('active');
-            }
-            
-            if(tab === 'cart') {
-                document.getElementById('tab-btn-cart').classList.add('active');
-                document.getElementById('cart-view-section').style.display = 'block';
-                document.getElementById('orders-view-section').style.display = 'none';
-                updateCartView();
-            } else {
-                document.getElementById('tab-btn-orders').classList.add('active');
-                document.getElementById('cart-view-section').style.display = 'none';
-                document.getElementById('orders-view-section').style.display = 'block';
-                updateOrdersView();
-                updateOrdersBadge(); 
-            }
-        }
-
-        let touchstartX = 0;
-        let touchendX = 0;
-        let swipeThreshold = 60; 
-
-        const swipeWrapper = document.getElementById('page-cart');
-        swipeWrapper.addEventListener('touchstart', e => {
-            touchstartX = e.changedTouches[0].screenX;
-        }, {passive: true});
-        swipeWrapper.addEventListener('touchend', e => {
-            touchendX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, {passive: true});
-        function handleSwipe() {
-            if (touchstartX - touchendX > swipeThreshold && currentCartTab === 'cart') {
-                switchCartTab('orders');
-            }
-            if (touchendX - touchstartX > swipeThreshold && currentCartTab === 'orders') {
-                switchCartTab('cart');
-            }
-        }
-
-        function updateCartView() {
-            let container = document.getElementById('cart-container');
-            container.innerHTML = '';
-            if(cart.length === 0) {
-                document.getElementById('empty-cart-msg').style.display = 'block';
-                document.getElementById('cart-total-box').style.display = 'none';
-                document.getElementById('checkout-btn').style.display = 'none'; return;
-            }
-            document.getElementById('empty-cart-msg').style.display = 'none';
-            document.getElementById('cart-total-box').style.display = 'block';
-            document.getElementById('checkout-btn').style.display = 'block';
-
-            let total = 0;
-            cart.forEach((p, index) => {
-                total += p.price;
-                container.innerHTML += `
-                    <div class="cart-item">
-                        <img src="${p.images[0]}">
-                        <div class="cart-details">
-                            <div style="font-weight:600; font-size:14px;">${p.name}</div>
-                            <div style="font-size:11px; color:gray;">Code: ${p.code}</div>
-                            <div style="color:var(--primary); font-weight:700;">${formatPrice(p.price)}</div>
-                        </div>
-                        <div class="cart-remove" onclick="removeFromCart(${index})">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-                        </div>
-                    </div>
-                `;
-            });
-            document.getElementById('cart-total-price').innerText = formatPrice(total);
-        }
-
-        function updateOrdersView() {
-            let container = document.getElementById('orders-container');
-            container.innerHTML = '';
-            if(pastOrders.length === 0) { document.getElementById('empty-orders-msg').style.display = 'block'; return;
-            }
-            document.getElementById('empty-orders-msg').style.display = 'none';
-            
-            let reversedOrders = [...pastOrders].reverse();
-            reversedOrders.forEach((p) => {
-                container.innerHTML += `
-                    <div class="cart-item" style="background:#f9fcf9; position:relative; cursor:pointer;" onclick="openDetail(${p.id})">
-                        <img src="${p.images[0]}">
-                        <div class="cart-details">
-                            <div style="font-weight:600; font-size:14px;">${p.name}</div>
-                            <div style="font-size:11px; color:gray;">Code: ${p.code}</div>
-                            <div style="color:var(--primary); font-weight:700;">${formatPrice(p.price)}</div>
-                        </div>
-                        <div class="status-badge" style="position: absolute; right: 15px; top:15px;">Purchased</div>
-                    </div>
-                `;
-            });
-        }
-
-        function buyNow(id) {
-            if(!cart.find(x => x.id === id)) { cart.push(parsedProducts.find(x => x.id === id));
-                saveUserCart(); updateCartBadge(); }
-            handleCheckout();
-        }
-
-        function handleCheckout() { 
-            if(cart.length === 0) return;
-            let total = cart.reduce((s, p) => s + p.price, 0);
-            document.getElementById('checkout-total-price').innerText = formatPrice(total);
-            switchPage('page-checkout');
-        }
-
-        function submitOrderForm(e) {
-            e.preventDefault();
-            let btn = document.getElementById('submit-btn'); btn.innerText = "Placing Order... Please wait"; btn.disabled = true;
-            let total = cart.reduce((s, p) => s + p.price, 0);
-            let itemsText = cart.map(p => p.name).join(' | ');
-            let codesText = cart.map(p => p.code).join(' | ');
-            let linksText = cart.map(p => p.hiddenLink || 'No Link').join(' | ');
-            let data = new URLSearchParams();
-            data.append("name", document.getElementById('form-name').value);
-            data.append("phone", document.getElementById('form-phone').value);
-            data.append("email", document.getElementById('form-email').value); 
-            data.append("city", document.getElementById('form-city').value);
-            data.append("area", document.getElementById('form-area').value);
-            data.append("address", document.getElementById('form-address').value);
-            data.append("orderDetails", itemsText);
-            data.append("productCodes", codesText); 
-            data.append("totalAmount", formatPrice(total));
-            data.append("hiddenProductLinks", linksText); 
-
-            fetch(GOOGLE_SHEET_URL, { method: 'POST', body: data })
-            .then(response => response.text())
-            .then(result => {
-                showCustomAlert("Congratulations! Your order has been placed successfully.", ALERT_TYPE.SUCCESS_ORDER); 
-                cart.forEach(item => pastOrders.push(item));
-                saveUserOrders(); 
- 
-                cart = []; saveUserCart(); updateCartBadge();
-                document.getElementById('orderForm').reset();
-                btn.innerText = "Confirm & Place Order"; btn.disabled = false;
-                switchPage('page-home'); 
-            })
-            
-            .catch(error => {
-                showCustomAlert("System Alert: Order connection failed. Please check internet and try again.", ALERT_TYPE.INFO); 
-                btn.innerText = "Confirm & Place Order"; btn.disabled = false;
-            });
-        }
-
-        function initApp() {
-            document.getElementById('main-brand-logo').src = SHOP_LOGO;
-            document.getElementById('ui-promo-text').innerHTML = `MEGA SALE<br>Up to ${GLOBAL_DISCOUNT_PERCENT}% OFF`;
-            document.getElementById('discount-page-title').innerHTML = `MEGA SALE ${GLOBAL_DISCOUNT_PERCENT}% OFF`;
-            parsedProducts = MY_PRODUCTS.map((p, index) => {
-                let mainCat = Object.keys(p.categories).find(k => p.categories[k] === 1) || 'General';
-                return {
-                    id: index + 1,
-                    code: p.code,
-                    name: p.name,
-                    images: p.images,
-                    originalPrice: p.price,
-                    price: getDiscountedPrice(p.price, p.discount),
-                    description: p.description,
-                    discount: p.discount,
-                    categories: p.categories,
-                    mainCategory: mainCat,
-                    hiddenLink: p.hiddenLink || "" 
-                };
-            });
-            loadStorageData();
-            renderHome();
-            filterCategoryView();
-        }
-    </script>
-
-    <script>
-        // --- ADMIN SHOP CONFIGURATION LOGIC ---
-        const SHOP_LOGO = "WhatsApp Image 2026-04-18 at 10.33.43 AM.jpeg";
-        const GLOBAL_DISCOUNT_PERCENT = 20;
-        
-        // --- MY PRODUCTS ARRAY LOGIC ---
-        const MY_PRODUCTS = [
-            {
-                code: "LUX-001",
-                name: "Embroidered 3-Piece Dhanak Suit with Pashmina Dupatta",
-                images: ["WhatsApp Image 2026-04-18 at 10.48.22 AM.jpeg", "WhatsApp Image 2026-04-18 at 10.46.23 AM.jpeg", "WhatsApp Image 2026-04-18 at 10.46.22 AM.jpeg"], 
-                price: 4500,
-                description: "This stunning 3-piece unstitched suit is perfect for Bakra Eid, weddings, or any festive occasion where you want to look elegant and confident. Designed with premium quality materials, it’s stylish enough for special events while remaining comfortable for daily wear. The maroon shirt and white trousers offer a classic yet trendy look that suits Pakistani fashion trends.",
-                discount: "no", 
-                categories: { Clothes: 1, Bags: 0, Cosmetics: 0, Shoes: 0, Accessories: 0 },
-                hiddenLink: "MZ61900002013AMFS" 
-            },
-            {
-                code: "LUX-002",
-                name: "",
-                images: ["WhatsApp Image 2026-04-17 at 5.05.39 PM (2).jpeg", "WhatsApp Image 2026-04-17 at 5.05.39 PM.jpeg", "WhatsApp Image 2026-04-17 at 5.05.39 PM (1).jpeg"],
-                price: 5500,
-                description: "LAWN WITH DIGITAL PRINT VOIL DOBBY DUPATTA  LAWN Shirt Front  HEAVY  Embroidery     LAWN FULL HEAVY Sleeves  Embroidery  Lawn Back Dyed  DIGITAL PRINT VOIL DOBBY DUPATTA  ",
-                discount: "no",
-                categories: { Clothes: 1, Bags: 0, Cosmetics: 0, Shoes: 0, Accessories: 0 },
-                hiddenLink: "MZ1734200409MHSE" 
-            },
-            {
-                code: "LUX-003",
-                name: "2 Pcs Women's Stitched Cotton Embroidered Shirt And Trouser",
-                images: ["WhatsApp Image 2026-04-18 at 12.41.31 PM.jpeg", "WhatsApp Image 2026-04-18 at 12.41.07 PM.jpeg"],
-                price: 3400,
-                description: "2 Pcs Women's Stitched Cotton Embroidered Shirt And Trouser",
-                discount: "no",
-                categories: { Clothes: 1, Bags: 0, Cosmetics: 0, Shoes: 0, Accessories: 0 },
-                hiddenLink: "MZ71400000306CNCN" 
-            },
-            {
-                code: "LUX-004",
-                name: "2 Pcs Women's Unstitched Embroidered Suit",
-                images: ["WhatsApp Image 2026-04-18 at 12.34.50 PM.jpeg", "WhatsApp Image 2026-04-18 at 12.31.30 PM.jpeg"],
-                price: 3300,
-                description: "2 Pcs Women's Unstitched Embroidered Suit",
-                discount: "no",
-                categories: { Clothes: 1, Bags: 0, Cosmetics: 0, Shoes: 0, Accessories: 0 },
-                hiddenLink: "MZ61900002160AMFS" 
-            },
-            {
-                code: "LUX-005",
-                name: "Cotton Lawn 2-Piece Set Black Lace Daily Wear",
-                images: ["WhatsApp Image 2026-04-18 at 12.49.21 PM.jpeg", "WhatsApp Image 2026-04-18 at 12.49.22 PM.jpeg", "WhatsApp Image 2026-04-18 at 12.49.20 PM.jpeg"],
-                price: 2300,
-                description: "Looking for a comfortable yet stylish outfit for daily wear in Pakistan? This 2-piece set is perfect for the warm weather, offering breathability and elegance without compromising on durability. The cotton lawn fabric keeps you cool while the delicate lace work adds a touch of sophistication to your look.",
-                discount: "no",
-                categories: { Clothes: 1, Bags: 0, Cosmetics: 0, Shoes: 0, Accessories: 0 },
-                hiddenLink: "MZ72920044ALJTCN" 
-            }
-        ];
-        initApp();
-    </script>
 </body>
 </html>
