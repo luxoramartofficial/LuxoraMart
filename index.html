@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon</title>
+    <title>COMING SOON | PMX</title>
     <style>
-        /* Google Font import for a clean, modern look */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
         * {
@@ -18,70 +17,102 @@
         body {
             height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            /* Animated Dark Gradient Background */
-            background: linear-gradient(-45deg, #0f172a, #1e293b, #334155, #0f172a);
-            background-size: 400% 400%;
-            animation: gradientBG 10s ease infinite;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
             color: #ffffff;
             overflow: hidden;
             position: relative;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Abstract Floating Blue Spheres */
+        .orb {
+            position: absolute;
+            background: radial-gradient(circle at 30% 30%, #4facfe, #00f2fe);
+            border-radius: 50%;
+            opacity: 0.6;
+            filter: blur(10px);
+            animation: float 15s ease-in-out infinite;
         }
 
-        /* Glassmorphism Effect Container */
+        .orb-1 {
+            width: 250px;
+            height: 250px;
+            top: 15%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 150px;
+            height: 150px;
+            bottom: 25%;
+            right: 15%;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            50% {
+                transform: translateY(-50px) translateX(30px);
+            }
+        }
+
+        /* Wave Effect on Bottom */
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 20vh;
+            background: linear-gradient(to top, rgba(79, 172, 254, 0.2), transparent);
+            border-radius: 50% 50% 0 0;
+            filter: blur(20px);
+            transform: scaleX(1.5);
+        }
+
+        /* Content Styles */
         .container {
             text-align: center;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 4rem 5rem;
-            border-radius: 24px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
             z-index: 10;
         }
 
-        h1 {
-            font-size: 3.5rem;
+        .status-text {
+            font-weight: 300;
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .coming-soon-title {
+            font-size: 5rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 15px;
-            /* Gradient Text */
-            background: linear-gradient(to right, #00f2fe, #4facfe);
+            letter-spacing: 8px;
+            margin-bottom: 2rem;
+            background: linear-gradient(to right, #ffffff 50%, #4facfe 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        p {
-            font-size: 1.1rem;
-            font-weight: 300;
-            color: #cbd5e1;
-            margin-bottom: 35px;
-            letter-spacing: 1px;
-        }
-
-        /* Bouncing Dots Loader to indicate "working in background" */
+        /* Bouncing Dots Loader */
         .loader {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
+            margin-top: 2rem;
         }
 
         .dot {
-            width: 16px;
-            height: 16px;
+            width: 15px;
+            height: 15px;
             background-color: #4facfe;
             border-radius: 50%;
             animation: bounce 1.4s infinite ease-in-out both;
-            box-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
+            box-shadow: 0 0 10px rgba(79, 172, 254, 0.7);
         }
 
         .dot:nth-child(1) { animation-delay: -0.32s; }
@@ -92,43 +123,24 @@
             40% { transform: scale(1); }
         }
 
-        /* Glowing background blobs for depth */
-        .blob {
-            position: absolute;
-            filter: blur(80px);
-            z-index: 1;
-            opacity: 0.4;
-            border-radius: 50%;
-        }
-        .blob1 {
-            width: 350px; height: 350px;
-            background: #4facfe;
-            top: -100px; left: -100px;
-        }
-        .blob2 {
-            width: 450px; height: 450px;
-            background: #00f2fe;
-            bottom: -150px; right: -100px;
-        }
-        
-        /* Mobile Responsiveness */
-        @media (max-width: 600px) {
-            .container {
-                padding: 2.5rem 2rem;
-                width: 90%;
+        @media (max-width: 768px) {
+            .coming-soon-title {
+                font-size: 3rem;
+                letter-spacing: 4px;
             }
-            h1 { font-size: 2.2rem; }
-            p { font-size: 0.9rem; }
+            .orb-1 { width: 150px; height: 150px; }
+            .orb-2 { width: 100px; height: 100px; }
         }
     </style>
 </head>
 <body>
-    <div class="blob blob1"></div>
-    <div class="blob blob2"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="wave"></div>
     
     <div class="container">
-        <h1>Coming Soon</h1>
-        <p>Developers are still working in the background...</p>
+        <p class="status-text">Our developers are still working hard in the background...</p>
+        <h1 class="coming-soon-title">Coming Soon</h1>
         
         <div class="loader">
             <div class="dot"></div>
