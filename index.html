@@ -6,17 +6,6 @@
     <title>Luxora Mart | Elite Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* --- LUXORA MART OPENING SPLASH --- */
-        html { color-scheme: light !important; }
-        #luxora-splash { position:fixed; inset:0; z-index:1000000; display:flex; align-items:center; justify-content:center; background:#fff; overflow:hidden; opacity:1; visibility:visible; transition:opacity .65s cubic-bezier(.22,1,.36,1),visibility .65s ease; }
-        #luxora-splash.hide { opacity:0; visibility:hidden; pointer-events:none; }
-        .luxora-splash-content { display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; text-align:center; transform:translateY(8px) scale(.94); opacity:0; animation:luxoraSplashIn 1.15s cubic-bezier(.22,1,.36,1) forwards; }
-        .luxora-splash-title { font-size:clamp(30px,10vw,58px); line-height:1; font-weight:900; letter-spacing:4px; text-transform:uppercase; background:var(--primary-gradient); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; text-align:center; filter:drop-shadow(0 8px 18px rgba(255,75,43,.14)); }
-        .luxora-splash-line { width:0; height:3px; margin-top:16px; border-radius:99px; background:var(--primary-gradient); animation:luxoraSplashLine .8s .45s cubic-bezier(.22,1,.36,1) forwards; }
-        @keyframes luxoraSplashIn { 0%{opacity:0;transform:translateY(14px) scale(.92);filter:blur(5px)} 55%{opacity:1;filter:blur(0)} 100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)} }
-        @keyframes luxoraSplashLine { from{width:0;opacity:0} to{width:72px;opacity:1} }
-        @media (prefers-reduced-motion:reduce){#luxora-splash,.luxora-splash-content,.luxora-splash-line{animation:none!important;transition:none!important}.luxora-splash-content{opacity:1;transform:none}.luxora-splash-line{width:72px;opacity:1}}
-
         /* --- PRO THEME VARIABLES --- */
         :root {
             --primary: #ff4b2b;
@@ -364,15 +353,6 @@
     </style>
 </head>
 <body>
-    <!-- Luxora Mart opening animation -->
-    <div id="luxora-splash" aria-hidden="true">
-        <div class="luxora-splash-content">
-            <div class="luxora-splash-title">LUXORA MART</div>
-            <div class="luxora-splash-line"></div>
-        </div>
-    </div>
-
-
 
     <div id="fullscreen-image-modal" class="fullscreen-modal" onclick="closeFullscreenModal()">
         <span class="close-fullscreen">&times;</span>
@@ -548,16 +528,6 @@
     </div>
 
     <script>
-        /* --- FORCE LIGHT MODE + OPENING ANIMATION --- */
-        (function(){
-            document.documentElement.style.colorScheme='light';
-            const meta=document.querySelector('meta[name="color-scheme"]') || document.createElement('meta');
-            meta.name='color-scheme'; meta.content='light';
-            if(!meta.parentNode) document.head.appendChild(meta);
-            const splash=document.getElementById('luxora-splash');
-            window.setTimeout(()=>{ if(splash){ splash.classList.add('hide'); window.setTimeout(()=>splash.remove(),700); } },1750);
-        })();
-
         const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbyNDhniYHVj9GHnc3i36CSKPiuMG-iCl4YKUsfjdeUZYqdOGJm7Z_NzJ0-a6RL7ioWmHA/exec"; 
         
         let parsedProducts = [];
